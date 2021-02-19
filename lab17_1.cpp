@@ -22,22 +22,21 @@ string toUpperStr(string x){
 }
 
 void importDataFromFile(string fn,vector<string> &names,vector<int> &scores,vector<char> &grades){
-    ifstream op;
-    op.open("name_score.txt");
+    ifstream source("name_score.txt");
     string text;
     char name[100];
     char format[] = "%[^:]:%i %i %i";
-    while(getline(op,text)){
+    while(getline(source,text)){
         int a=0,b=0,c=0;
-        char textx[100];
-        strcpy(textx,text.c_str());
-        sscanf(textx,format,name,&a,&b,&c);
+        char ctext[100];
+        strcpy(ctext,text.c_str());
+        sscanf(ctext,format,name,&a,&b,&c);
         int score=a+b+c;
         names.push_back(name);
         scores.push_back(score);
         grades.push_back(score2grade(score));
     }
-    op.close();
+    source.close();
 }
 
 void getCommand(string &command,string &key){
